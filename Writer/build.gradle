@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+apply plugin: 'application'
+group 'org.abondar.experimental'
+version '1.0'
+
+mainClassName = 'org.abondar.experimental.document.sender.writer.WriterApplication'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+//remove after spring-boot
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'org.abondar.experimental.document.sender.writer.WriterApplication'
+        )
+    }
+}
+
+dependencies {
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+}
