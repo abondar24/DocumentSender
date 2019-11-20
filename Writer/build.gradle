@@ -3,6 +3,7 @@ plugins {
     id 'jacoco'
     id 'idea'
     id "org.springframework.boot" version "2.2.0.RELEASE"
+    id "io.freefair.lombok" version "4.1.4"
 }
 
 apply plugin: 'application'

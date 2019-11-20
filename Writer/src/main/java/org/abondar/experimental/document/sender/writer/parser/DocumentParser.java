@@ -1,5 +1,6 @@
 package org.abondar.experimental.document.sender.writer.parser;
 
+import org.abondar.experimental.document.sender.writer.model.DocumentData;
 import org.apache.tika.detect.DefaultDetector;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
@@ -13,6 +14,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Class for parsing of incoming document
@@ -27,7 +32,7 @@ public class DocumentParser {
      *
      * @param file - incoming file to parse
      */
-    public void parseDocument(InputStream file) throws IOException, SAXException, TikaException {
+    public DocumentData parseDocument(InputStream file) throws IOException, SAXException, TikaException {
 
         var detector = new DefaultDetector();
         var metadata = new Metadata();
@@ -38,9 +43,20 @@ public class DocumentParser {
         var parser = new AutoDetectParser();
         parser.parse(file, contentHandler, metadata, parseContext);
 
-        System.out.println(mediaType.toString());
-        System.out.println(contentHandler.toString());
-        System.out.println(metadata.toString());
+
+        return new DocumentData(mediaType.toString(), contentHandler.toString(),getMetadata(metadata));
+    }
+
+    private List<String> getMetadata(Metadata metadata){
+        List<String> metadataList = new ArrayList<>();
+        metadataList.add(metadata.get("Content-Type"));
+        metadataList.add(metadata.get("meta:creation-date"));
+        metadataList.add(metadata.get("meta:save-date"));
+        metadataList.add(metadata.get("modified"));
+        metadataList.add(metadata.get("pdf:PDFVersion"));
+        metadataList.add(metadata.get("xmp:CreatorTool"));
+
+        return metadataList.stream().filter(Objects::nonNull).collect(Collectors.toList());
     }
 
 
