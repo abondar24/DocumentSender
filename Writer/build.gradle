@@ -4,6 +4,7 @@ plugins {
     id 'idea'
     id "org.springframework.boot" version "2.2.0.RELEASE"
     id "io.freefair.lombok" version "4.1.4"
+    id "com.commercehub.gradle.plugin.avro" version "0.9.1"
 }
 
 apply plugin: 'application'
@@ -33,6 +34,8 @@ dependencies {
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
 
     implementation "org.apache.tika:tika-parsers:$tikaVersion"
+
+    implementation "org.apache.avro:avro-compiler:$avroVersion"
 
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-web"

@@ -1,12 +1,9 @@
 package org.abondar.experimental.document.sender.writer.parser;
 
-import org.abondar.experimental.document.sender.writer.model.DocumentData;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,7 +15,7 @@ public class DocumentParserTest {
     private String testContent = "Big Test";
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         parser = new DocumentParser();
     }
 
@@ -51,7 +48,7 @@ public class DocumentParserTest {
         assertTrue(data.getContent().contains(testContent));
         assertEquals("application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 data.getMediaType());
-        assertEquals("application/vnd.openxmlformats-officedocument.wordprocessingml.document",data.getMetadata().get(0));
+        assertEquals("application/vnd.openxmlformats-officedocument.wordprocessingml.document", data.getMetadata().get(0));
         assertNotNull(data.getMetadata().get(1));
 
 
@@ -64,7 +61,7 @@ public class DocumentParserTest {
         assertTrue(data.getContent().contains(testContent));
         assertEquals("application/vnd.oasis.opendocument.text",
                 data.getMediaType());
-        assertEquals("application/vnd.oasis.opendocument.text",data.getMetadata().get(0));
+        assertEquals("application/vnd.oasis.opendocument.text", data.getMetadata().get(0));
         assertNotNull(data.getMetadata().get(1));
     }
 }
