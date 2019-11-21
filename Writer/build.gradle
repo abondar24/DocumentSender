@@ -32,15 +32,34 @@ test {
 
 dependencies {
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
-
     implementation "org.apache.tika:tika-parsers:$tikaVersion"
-
     implementation "org.apache.avro:avro-compiler:$avroVersion"
 
+    //spring-boot dependencies
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
+    //cxf-dependencies
+    implementation "org.apache.cxf:cxf-spring-boot-starter-jaxrs:$cxfVersion"
+    implementation "org.apache.cxf:cxf-rt-rs-service-description:$cxfVersion"
+    implementation "org.apache.cxf:cxf-rt-transports-http:$cxfVersion"
+    implementation "org.apache.cxf:cxf-rt-transports-local:$cxfVersion"
+    implementation "org.apache.cxf:cxf-rt-features-logging:$cxfVersion"
+
+    implementation "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jacksonVersion"
+
+
+    //camel-dependencies
+    implementation "org.apache.camel:camel-spring-boot-starter:$camelVersion"
+    implementation "org.apache.camel:camel-cxf-starter:$camelVersion"
+    implementation "org.apache.camel:camel-core:$camelVersion"
+    implementation "org.apache.camel:camel-cxf-transport-starter:$camelVersion"
+    implementation "org.apache.camel:camel-kafka:$camelVersion"
+
+
+
+    //test dependencies
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
