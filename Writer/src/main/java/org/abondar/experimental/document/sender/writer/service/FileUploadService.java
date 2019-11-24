@@ -1,7 +1,6 @@
 package org.abondar.experimental.document.sender.writer.service;
 
 
-import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 
 import javax.ws.rs.Consumes;
@@ -10,8 +9,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.Serializable;
 
-public interface FileUploadService {
+public interface FileUploadService extends Serializable {
 
     @POST
     @Path("/upload")

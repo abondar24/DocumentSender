@@ -10,10 +10,9 @@ import org.apache.avro.specific.SpecificData;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Document extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7498916434449357112L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Document\",\"namespace\":\"org.abondar.experimental.document.sender.writer.avro\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"mediaType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"content\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"metadata\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]}]}");
+  private static final long serialVersionUID = -4135039889624586897L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Document\",\"namespace\":\"org.abondar.experimental.document.sender.writer.avro\",\"fields\":[{\"name\":\"mediaType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"content\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"metadata\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.String name;
   @Deprecated public java.lang.String mediaType;
   @Deprecated public java.lang.String content;
   @Deprecated public java.lang.String metadata;
@@ -27,13 +26,11 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
 
   /**
    * All-args constructor.
-   * @param name The new value for name
    * @param mediaType The new value for mediaType
    * @param content The new value for content
    * @param metadata The new value for metadata
    */
-  public Document(java.lang.String name, java.lang.String mediaType, java.lang.String content, java.lang.String metadata) {
-    this.name = name;
+  public Document(java.lang.String mediaType, java.lang.String content, java.lang.String metadata) {
     this.mediaType = mediaType;
     this.content = content;
     this.metadata = metadata;
@@ -43,10 +40,9 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return name;
-    case 1: return mediaType;
-    case 2: return content;
-    case 3: return metadata;
+    case 0: return mediaType;
+    case 1: return content;
+    case 2: return metadata;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -55,28 +51,11 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: name = (java.lang.String)value$; break;
-    case 1: mediaType = (java.lang.String)value$; break;
-    case 2: content = (java.lang.String)value$; break;
-    case 3: metadata = (java.lang.String)value$; break;
+    case 0: mediaType = (java.lang.String)value$; break;
+    case 1: content = (java.lang.String)value$; break;
+    case 2: metadata = (java.lang.String)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
-  }
-
-  /**
-   * Gets the value of the 'name' field.
-   * @return The value of the 'name' field.
-   */
-  public java.lang.String getName() {
-    return name;
-  }
-
-  /**
-   * Sets the value of the 'name' field.
-   * @param value the value to set.
-   */
-  public void setName(java.lang.String value) {
-    this.name = value;
   }
 
   /**
@@ -159,7 +138,6 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Document>
     implements org.apache.avro.data.RecordBuilder<Document> {
 
-    private java.lang.String name;
     private java.lang.String mediaType;
     private java.lang.String content;
     private java.lang.String metadata;
@@ -175,21 +153,17 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
      */
     private Builder(org.abondar.experimental.document.sender.writer.avro.Document.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.name)) {
-        this.name = data().deepCopy(fields()[0].schema(), other.name);
+      if (isValidValue(fields()[0], other.mediaType)) {
+        this.mediaType = data().deepCopy(fields()[0].schema(), other.mediaType);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.mediaType)) {
-        this.mediaType = data().deepCopy(fields()[1].schema(), other.mediaType);
+      if (isValidValue(fields()[1], other.content)) {
+        this.content = data().deepCopy(fields()[1].schema(), other.content);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.content)) {
-        this.content = data().deepCopy(fields()[2].schema(), other.content);
+      if (isValidValue(fields()[2], other.metadata)) {
+        this.metadata = data().deepCopy(fields()[2].schema(), other.metadata);
         fieldSetFlags()[2] = true;
-      }
-      if (isValidValue(fields()[3], other.metadata)) {
-        this.metadata = data().deepCopy(fields()[3].schema(), other.metadata);
-        fieldSetFlags()[3] = true;
       }
     }
 
@@ -199,61 +173,18 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
      */
     private Builder(org.abondar.experimental.document.sender.writer.avro.Document other) {
             super(SCHEMA$);
-      if (isValidValue(fields()[0], other.name)) {
-        this.name = data().deepCopy(fields()[0].schema(), other.name);
+      if (isValidValue(fields()[0], other.mediaType)) {
+        this.mediaType = data().deepCopy(fields()[0].schema(), other.mediaType);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.mediaType)) {
-        this.mediaType = data().deepCopy(fields()[1].schema(), other.mediaType);
+      if (isValidValue(fields()[1], other.content)) {
+        this.content = data().deepCopy(fields()[1].schema(), other.content);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.content)) {
-        this.content = data().deepCopy(fields()[2].schema(), other.content);
+      if (isValidValue(fields()[2], other.metadata)) {
+        this.metadata = data().deepCopy(fields()[2].schema(), other.metadata);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.metadata)) {
-        this.metadata = data().deepCopy(fields()[3].schema(), other.metadata);
-        fieldSetFlags()[3] = true;
-      }
-    }
-
-    /**
-      * Gets the value of the 'name' field.
-      * @return The value.
-      */
-    public java.lang.String getName() {
-      return name;
-    }
-
-    /**
-      * Sets the value of the 'name' field.
-      * @param value The value of 'name'.
-      * @return This builder.
-      */
-    public org.abondar.experimental.document.sender.writer.avro.Document.Builder setName(java.lang.String value) {
-      validate(fields()[0], value);
-      this.name = value;
-      fieldSetFlags()[0] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'name' field has been set.
-      * @return True if the 'name' field has been set, false otherwise.
-      */
-    public boolean hasName() {
-      return fieldSetFlags()[0];
-    }
-
-
-    /**
-      * Clears the value of the 'name' field.
-      * @return This builder.
-      */
-    public org.abondar.experimental.document.sender.writer.avro.Document.Builder clearName() {
-      name = null;
-      fieldSetFlags()[0] = false;
-      return this;
     }
 
     /**
@@ -270,9 +201,9 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public org.abondar.experimental.document.sender.writer.avro.Document.Builder setMediaType(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[0], value);
       this.mediaType = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[0] = true;
       return this;
     }
 
@@ -281,7 +212,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'mediaType' field has been set, false otherwise.
       */
     public boolean hasMediaType() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[0];
     }
 
 
@@ -291,7 +222,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public org.abondar.experimental.document.sender.writer.avro.Document.Builder clearMediaType() {
       mediaType = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[0] = false;
       return this;
     }
 
@@ -309,9 +240,9 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public org.abondar.experimental.document.sender.writer.avro.Document.Builder setContent(java.lang.String value) {
-      validate(fields()[2], value);
+      validate(fields()[1], value);
       this.content = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -320,7 +251,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'content' field has been set, false otherwise.
       */
     public boolean hasContent() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[1];
     }
 
 
@@ -330,7 +261,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public org.abondar.experimental.document.sender.writer.avro.Document.Builder clearContent() {
       content = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -348,9 +279,9 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public org.abondar.experimental.document.sender.writer.avro.Document.Builder setMetadata(java.lang.String value) {
-      validate(fields()[3], value);
+      validate(fields()[2], value);
       this.metadata = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -359,7 +290,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'metadata' field has been set, false otherwise.
       */
     public boolean hasMetadata() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
 
 
@@ -369,7 +300,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public org.abondar.experimental.document.sender.writer.avro.Document.Builder clearMetadata() {
       metadata = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -377,10 +308,9 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
     public Document build() {
       try {
         Document record = new Document();
-        record.name = fieldSetFlags()[0] ? this.name : (java.lang.String) defaultValue(fields()[0]);
-        record.mediaType = fieldSetFlags()[1] ? this.mediaType : (java.lang.String) defaultValue(fields()[1]);
-        record.content = fieldSetFlags()[2] ? this.content : (java.lang.String) defaultValue(fields()[2]);
-        record.metadata = fieldSetFlags()[3] ? this.metadata : (java.lang.String) defaultValue(fields()[3]);
+        record.mediaType = fieldSetFlags()[0] ? this.mediaType : (java.lang.String) defaultValue(fields()[0]);
+        record.content = fieldSetFlags()[1] ? this.content : (java.lang.String) defaultValue(fields()[1]);
+        record.metadata = fieldSetFlags()[2] ? this.metadata : (java.lang.String) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

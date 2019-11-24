@@ -2,7 +2,6 @@
  "type": "record",
  "name": "Document",
  "fields": [
-     {"name": "name", "type": "string"},
      {"name": "mediaType",  "type": "string"},
      {"name": "content", "type": "string"},
      {"name": "metadata", "type": ["string", "null"]}]
