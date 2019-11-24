@@ -4,5 +4,8 @@
  "fields": [
      {"name": "mediaType",  "type": "string"},
      {"name": "content", "type": "string"},
-     {"name": "metadata", "type": ["string", "null"]}]
+     {"name": "metadata","type": {
+                               "type": "array",
+                               "items": "string"
+                            } }]
 }

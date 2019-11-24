@@ -10,12 +10,12 @@ import org.apache.avro.specific.SpecificData;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Document extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4135039889624586897L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Document\",\"namespace\":\"org.abondar.experimental.document.sender.writer.avro\",\"fields\":[{\"name\":\"mediaType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"content\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"metadata\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]}]}");
+  private static final long serialVersionUID = 1293531575104147763L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Document\",\"namespace\":\"org.abondar.experimental.document.sender.writer.avro\",\"fields\":[{\"name\":\"mediaType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"content\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"metadata\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String mediaType;
   @Deprecated public java.lang.String content;
-  @Deprecated public java.lang.String metadata;
+  @Deprecated public java.util.List<java.lang.String> metadata;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -30,7 +30,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
    * @param content The new value for content
    * @param metadata The new value for metadata
    */
-  public Document(java.lang.String mediaType, java.lang.String content, java.lang.String metadata) {
+  public Document(java.lang.String mediaType, java.lang.String content, java.util.List<java.lang.String> metadata) {
     this.mediaType = mediaType;
     this.content = content;
     this.metadata = metadata;
@@ -53,7 +53,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
     switch (field$) {
     case 0: mediaType = (java.lang.String)value$; break;
     case 1: content = (java.lang.String)value$; break;
-    case 2: metadata = (java.lang.String)value$; break;
+    case 2: metadata = (java.util.List<java.lang.String>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -94,7 +94,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
    * Gets the value of the 'metadata' field.
    * @return The value of the 'metadata' field.
    */
-  public java.lang.String getMetadata() {
+  public java.util.List<java.lang.String> getMetadata() {
     return metadata;
   }
 
@@ -102,7 +102,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'metadata' field.
    * @param value the value to set.
    */
-  public void setMetadata(java.lang.String value) {
+  public void setMetadata(java.util.List<java.lang.String> value) {
     this.metadata = value;
   }
 
@@ -140,7 +140,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
 
     private java.lang.String mediaType;
     private java.lang.String content;
-    private java.lang.String metadata;
+    private java.util.List<java.lang.String> metadata;
 
     /** Creates a new Builder */
     private Builder() {
@@ -269,7 +269,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * Gets the value of the 'metadata' field.
       * @return The value.
       */
-    public java.lang.String getMetadata() {
+    public java.util.List<java.lang.String> getMetadata() {
       return metadata;
     }
 
@@ -278,7 +278,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'metadata'.
       * @return This builder.
       */
-    public org.abondar.experimental.document.sender.writer.avro.Document.Builder setMetadata(java.lang.String value) {
+    public org.abondar.experimental.document.sender.writer.avro.Document.Builder setMetadata(java.util.List<java.lang.String> value) {
       validate(fields()[2], value);
       this.metadata = value;
       fieldSetFlags()[2] = true;
@@ -310,7 +310,7 @@ public class Document extends org.apache.avro.specific.SpecificRecordBase implem
         Document record = new Document();
         record.mediaType = fieldSetFlags()[0] ? this.mediaType : (java.lang.String) defaultValue(fields()[0]);
         record.content = fieldSetFlags()[1] ? this.content : (java.lang.String) defaultValue(fields()[1]);
-        record.metadata = fieldSetFlags()[2] ? this.metadata : (java.lang.String) defaultValue(fields()[2]);
+        record.metadata = fieldSetFlags()[2] ? this.metadata : (java.util.List<java.lang.String>) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

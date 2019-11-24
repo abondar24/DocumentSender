@@ -14,13 +14,13 @@ import org.xml.sax.SAXException;
 
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.io.InputStream;
 
 @Component
 public class UploadRoute extends RouteBuilder {
 
     private DocumentParser documentParser;
 
+    private DocumentData res;
 
     @Autowired
     public UploadRoute(DocumentParser documentParser) {
@@ -41,10 +41,8 @@ public class UploadRoute extends RouteBuilder {
                 .body((bdy, hdrs) -> {
                     MultipartBody mBody = (MultipartBody) bdy;
                     try {
-                        var dataHandler =mBody.getAllAttachments().get(0).getDataHandler();
-                        var res = documentParser.parseDocument(dataHandler.getInputStream());
-
-                        System.out.println(res);
+                        var dataHandler = mBody.getAllAttachments().get(0).getDataHandler();
+                        res = documentParser.parseDocument(dataHandler.getInputStream());
 
                         return Response.ok(ResponseMessageUtil.FILE_UPLOADED).build();
                     } catch (IOException | SAXException | TikaException ex) {
@@ -60,12 +58,13 @@ public class UploadRoute extends RouteBuilder {
                 .transform()
                 .body((bdy, hdrs) -> {
 
-                    //build full method
-                 //   var doc = Document.newBuilder().setContent(res.getContent());
-                  //  return doc.build();
-                    return bdy;
-                });
-        //to("kafka");
+                   var doc = Document.newBuilder()
+                            .setContent(res.getContent())
+                            .setMediaType(res.getMediaType())
+                            .setMetadata(res.getMetadata());
+                    return doc.build();
+                })
+                .to("kafka:documentSender?brokers=localhost:9092");
     }
 
 }
