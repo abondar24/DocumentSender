@@ -1,4 +1,4 @@
-package org.abondar.experimental.document.sender.writer.service;
+package org.abondar.experimental.document.sender.writer;
 
 /**
  * Response messages for rest

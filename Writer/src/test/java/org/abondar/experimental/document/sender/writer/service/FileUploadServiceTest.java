@@ -1,6 +1,7 @@
 package org.abondar.experimental.document.sender.writer.service;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import org.abondar.experimental.document.sender.writer.ResponseMessageUtil;
 import org.abondar.experimental.document.sender.writer.WriterApplication;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSBindingFactory;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 
 import java.util.Collections;

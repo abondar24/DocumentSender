@@ -2,20 +2,20 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'idea'
-    id "org.springframework.boot" version "2.2.0.RELEASE"
-    id "io.freefair.lombok" version "4.1.4"
-    id "com.commercehub.gradle.plugin.avro" version "0.9.1"
+    id "org.springframework.boot" version "$springBootVersion"
+    id "io.freefair.lombok" version "$lombokVersion"
+    id "com.sksamuel.avropoet" version "$avroVersion"
 }
 
 apply plugin: 'application'
 apply plugin: 'io.spring.dependency-management'
 
 group 'org.abondar.experimental'
-version '1.0'
+version '1.1'
 
 mainClassName = 'org.abondar.experimental.document.sender.writer.WriterApplication'
 
-sourceCompatibility = 11
+sourceCompatibility = 21
 
 bootJar {
     archivesBaseName = 'writer'
@@ -32,34 +32,23 @@ test {
 
 dependencies {
     implementation "org.apache.tika:tika-parsers:$tikaVersion"
-    implementation "org.apache.avro:avro-compiler:$avroVersion"
+    implementation "org.apache.avro:avro-compiler:$avroCompilerVersion"
 
+    implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
 
-    implementation "org.apache.cxf:cxf-spring-boot-starter-jaxrs:$cxfVersion"
-    implementation "org.apache.camel:camel-spring-boot-starter:$camelVersion"
 
-    implementation "org.apache.cxf:cxf-rt-rs-service-description:$cxfVersion"
-    implementation "org.apache.cxf:cxf-rt-transports-http:$cxfVersion"
-    implementation "org.apache.cxf:cxf-rt-transports-local:$cxfVersion"
-
-    implementation "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jacksonVersion"
-
-    implementation "javax.xml.ws:jaxws-api:$jaxWsVersion"
-    implementation "javax.annotation:javax.annotation-api:1.3.2"
-    compileOnly "javax.servlet:javax.servlet-api:3.0.1"
-
-    implementation "org.apache.camel:camel-cxf-starter:$camelVersion"
     implementation "org.apache.camel:camel-core:$camelVersion"
-    implementation "org.apache.camel:camel-cxf-transport-starter:$camelVersion"
     implementation "org.apache.camel:camel-kafka:$camelVersion"
-
+    implementation "org.apache.camel:camel-http:$camelVersion"
+    implementation "org.apache.camel:camel-swagger-java:$camelSwaggerVersion"
+    implementation "org.apache.camel.springboot:camel-spring-boot-starter:$camelVersion"
+    implementation "org.apache.camel.springboot:camel-jackson-starter:$camelVersion"
+    implementation "org.apache.camel.springboot:camel-springdoc-starter:$camelVersion"
 
 
     //test dependencies
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
-    testImplementation "org.apache.camel:camel-test-spring:$camelVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+    testImplementation"org.apache.camel:camel-test-spring-junit5:$camelVersion"
 }

@@ -1,23 +1,21 @@
 plugins {
     id 'java'
     id 'idea'
-    id "com.commercehub.gradle.plugin.avro" version "0.9.1"
+    id "com.sksamuel.avropoet" version "$avroVersion"
 }
 
 apply plugin: 'application'
 
 group 'org.abondar.experimental'
-version '1.0'
+version '1.1'
 
 mainClassName = 'org.abondar.experimental.document.sender.reader.Reader'
 
-sourceCompatibility = 11
+sourceCompatibility = 21
 
 jar {
     from{
-        (configurations.runtime).collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
     manifest {
@@ -33,7 +31,7 @@ repositories {
 dependencies {
     implementation "org.apache.camel:camel-core:$camelVersion"
     implementation "org.apache.camel:camel-kafka:$camelVersion"
-    implementation "org.apache.avro:avro-compiler:$avroVersion"
+    implementation "org.apache.avro:avro-compiler:$avroCompilerVersion"
 
 }
 
