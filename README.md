@@ -6,7 +6,7 @@ Small document sender between microservices
 
 Two microservices(Writer and Reader) are connected to each other via Kafka (topic documentSender)
 
-Reader accepts documents like doc, odt and some pdf via REST endpoint(localhost:8080/cxf/sender/upload),
+Reader accepts documents like doc, odt and some pdf via REST endpoint(localhost:8080/sender/upload),
 parses it using Apache Tika, serializes content and metadata via Avro and sends to Kafka topic.
 
 Writer is listening for topic and reading document contents after deserealizing Avro document.

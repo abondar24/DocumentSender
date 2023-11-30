@@ -10,8 +10,6 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

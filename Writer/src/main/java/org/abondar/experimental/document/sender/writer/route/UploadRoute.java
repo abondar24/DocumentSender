@@ -3,22 +3,11 @@ package org.abondar.experimental.document.sender.writer.route;
 import org.abondar.experimental.document.sender.writer.avro.Document;
 import org.abondar.experimental.document.sender.writer.model.DocumentData;
 import org.abondar.experimental.document.sender.writer.parser.DocumentParser;
-import org.abondar.experimental.document.sender.writer.ResponseMessageUtil;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
-import org.apache.tika.exception.TikaException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.xml.sax.SAXException;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.io.IOException;
 
 @Component
 public class UploadRoute extends RouteBuilder {

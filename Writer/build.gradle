@@ -4,7 +4,7 @@ plugins {
     id 'idea'
     id "org.springframework.boot" version "$springBootVersion"
     id "io.freefair.lombok" version "$lombokVersion"
-    id "com.sksamuel.avropoet" version "$avroVersion"
+    id "com.bakdata.avro" version "$avroVersion"
 }
 
 apply plugin: 'application'
@@ -13,9 +13,6 @@ apply plugin: 'io.spring.dependency-management'
 group 'org.abondar.experimental'
 version '1.1'
 
-mainClassName = 'org.abondar.experimental.document.sender.writer.WriterApplication'
-
-sourceCompatibility = 21
 
 bootJar {
     archivesBaseName = 'writer'
@@ -31,7 +28,7 @@ test {
 }
 
 dependencies {
-    implementation "org.apache.tika:tika-parsers:$tikaVersion"
+    implementation "org.apache.tika:tika-core:$tikaVersion"
     implementation "org.apache.avro:avro-compiler:$avroCompilerVersion"
 
     implementation "org.springframework.boot:spring-boot-starter-web"

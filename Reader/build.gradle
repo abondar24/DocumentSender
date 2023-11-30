@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    id "com.sksamuel.avropoet" version "$avroVersion"
+    id "com.bakdata.avro" version "$avroVersion"
 }
 
 apply plugin: 'application'
