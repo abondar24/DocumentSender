@@ -42,7 +42,9 @@ dependencies {
     implementation "org.apache.camel:camel-swagger-java:$camelSwaggerVersion"
     implementation "org.apache.camel.springboot:camel-spring-boot-starter:$camelVersion"
     implementation "org.apache.camel.springboot:camel-jackson-starter:$camelVersion"
+    implementation("org.apache.camel.springboot:camel-servlet-starter:$camelVersion")
     implementation "org.apache.camel.springboot:camel-springdoc-starter:$camelVersion"
+    implementation("ch.qos.logback:logback-core:$logbackVersion")
 
 
     //test dependencies

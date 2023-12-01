@@ -1,0 +1,26 @@
+server:
+  port: 8020
+
+camel:
+  springboot:
+    name: Writer
+  component:
+    servlet:
+      allow-java-serialized-object: true
+  servlet:
+    mapping:
+      context-path: "/sender/*"
+  dataformat:
+    jackson:
+      use-list: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: mappings,metrics,shutdown
+
+
+kafka:
+  topicName: documentSender
+  broker: localhost:9092
