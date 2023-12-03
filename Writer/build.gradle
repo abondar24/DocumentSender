@@ -29,6 +29,7 @@ test {
 
 dependencies {
     implementation "org.apache.tika:tika-core:$tikaVersion"
+    implementation "org.apache.tika:tika-parsers-standard-package:$tikaVersion"
     implementation "org.apache.avro:avro-compiler:$avroCompilerVersion"
 
     implementation "org.springframework.boot:spring-boot-starter-web"

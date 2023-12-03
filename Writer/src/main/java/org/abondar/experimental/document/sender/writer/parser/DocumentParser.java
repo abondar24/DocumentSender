@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class for parsing of incoming document
@@ -42,19 +43,19 @@ public class DocumentParser {
         parser.parse(file, contentHandler, metadata, parseContext);
 
 
-        return new DocumentData(mediaType.toString(), contentHandler.toString(),getMetadata(metadata));
+        return new DocumentData(mediaType.toString(), contentHandler.toString(), getMetadata(metadata));
     }
 
-    private List<String> getMetadata(Metadata metadata){
-        List<String> metadataList = new ArrayList<>();
-        metadataList.add(metadata.get("Content-Type"));
-        metadataList.add(metadata.get("meta:creation-date"));
-        metadataList.add(metadata.get("meta:save-date"));
-        metadataList.add(metadata.get("modified"));
-        metadataList.add(metadata.get("pdf:PDFVersion"));
-        metadataList.add(metadata.get("xmp:CreatorTool"));
-
-        return metadataList.stream().filter(Objects::nonNull).collect(Collectors.toList());
+    private List<String> getMetadata(Metadata metadata) {
+        return Stream.of(
+                metadata.get("Content-Type"),
+                metadata.get("meta:creation-date"),
+                metadata.get("meta:save-date"),
+                metadata.get("modified"),
+                metadata.get("pdf:PDFVersion"),
+                metadata.get("xmp:CreatorTool")
+        ).filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
 

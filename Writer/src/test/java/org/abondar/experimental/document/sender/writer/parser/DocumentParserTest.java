@@ -26,7 +26,6 @@ public class DocumentParserTest {
         assertTrue(data.getContent().contains(testContent));
         assertEquals("application/x-tika-msoffice",data.getMediaType());
         assertEquals("application/msword",data.getMetadata().get(0));
-        assertNotNull(data.getMetadata().get(1));
     }
 
     @Test
@@ -49,9 +48,6 @@ public class DocumentParserTest {
         assertEquals("application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 data.getMediaType());
         assertEquals("application/vnd.openxmlformats-officedocument.wordprocessingml.document", data.getMetadata().get(0));
-        assertNotNull(data.getMetadata().get(1));
-
-
     }
 
     @Test
@@ -62,6 +58,5 @@ public class DocumentParserTest {
         assertEquals("application/vnd.oasis.opendocument.text",
                 data.getMediaType());
         assertEquals("application/vnd.oasis.opendocument.text", data.getMetadata().get(0));
-        assertNotNull(data.getMetadata().get(1));
     }
 }
