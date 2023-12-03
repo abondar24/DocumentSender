@@ -2,7 +2,7 @@ package org.abondar.experimental.document.sender.writer;
 
 import org.abondar.experimental.document.sender.writer.avro.Document;
 import org.abondar.experimental.document.sender.writer.model.DocumentData;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
