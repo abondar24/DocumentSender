@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.InputStream;
+
 @Component
 public class UploadRoute extends RouteBuilder {
 
@@ -41,8 +43,8 @@ public class UploadRoute extends RouteBuilder {
         from("direct:sendToKafka").routeId("kafkaSend")
                 .log(LoggingLevel.DEBUG, "#{headers}")
                 .process(exchange -> {
-                    var req = exchange.getIn().getBody(MultipartHttpServletRequest.class);
-                    res = documentParser.parseDocument(req.getFile("file").getInputStream());
+                    var req = exchange.getIn().getBody(InputStream.class);
+                    res = documentParser.parseDocument(req);
                     var doc = Document.newBuilder()
                             .setContent(res.getContent())
                             .setMediaType(res.getMediaType())

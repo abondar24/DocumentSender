@@ -6,19 +6,21 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.component.mock.MockEndpoint;
-
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.mock.web.MockMultipartHttpServletRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = {WriterApplication.class, UploadRoute.class})
+@SpringBootTest(classes = {WriterApplication.class, UploadRoute.class},
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UploadRouteTest {
 
     @Autowired
@@ -27,33 +29,61 @@ public class UploadRouteTest {
     @EndpointInject("mock:kafka:test")
     private MockEndpoint mockKafkaEndpoint;
 
+    @Autowired
+    private WebTestClient webTestClient;
+
     @Test
     public void sendToKafkaTest() throws Exception {
 
         AdviceWith.adviceWith(
                 producerTemplate.getCamelContext(),
                 "kafkaSend",
-                a-> a.interceptSendToEndpoint("direct:sendToKafka")
+                a -> a.interceptSendToEndpoint("direct:sendToKafka")
                         .skipSendToOriginalEndpoint()
                         .to(mockKafkaEndpoint.getEndpointUri())
         );
 
-        var req = new MockMultipartHttpServletRequest();
-
         var fStream = UploadRouteTest.class.getResourceAsStream("/test.doc");
-        var file = new MockMultipartFile("file","test.doc",
-                "application/msword",fStream);
-
-        req.addFile(file);
 
         Exchange exchange = producerTemplate.getCamelContext().getEndpoint("direct:sendToKafka").createExchange();
-        exchange.getIn().setBody(exchange);
+        exchange.getIn().setBody(fStream);
 
-        producerTemplate.send("direct:sendToKafka",exchange);
+        producerTemplate.send("direct:sendToKafka", exchange);
         mockKafkaEndpoint.assertIsSatisfied();
         mockKafkaEndpoint.expectedBodiesReceived();
         mockKafkaEndpoint.expectedHeaderValuesReceivedInAnyOrder("emailType", "createUser");
         mockKafkaEndpoint.expectedMessageCount(1);
+        mockKafkaEndpoint.reset();
+    }
+
+
+    @Test
+    public void uploadRestTest() throws Exception {
+        AdviceWith.adviceWith(
+                producerTemplate.getCamelContext(),
+                "kafkaSend",
+                a -> a.interceptSendToEndpoint("kafka:*")
+                        .skipSendToOriginalEndpoint()
+                        .to(mockKafkaEndpoint.getEndpointUri())
+        );
+
+        var fStream = UploadRouteTest.class.getResourceAsStream("/test.doc");
+        MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
+        parts.add("file", fStream.readAllBytes());
+
+
+        webTestClient
+                .post()
+                .uri("/sender/upload")
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "form-data; name=file; filename=test.doc")
+                .bodyValue(parts)
+                .exchange()
+                .expectStatus().isOk();
+
+
+        mockKafkaEndpoint.assertIsSatisfied();
+        mockKafkaEndpoint.expectedBodiesReceived();
         mockKafkaEndpoint.reset();
     }
 }
