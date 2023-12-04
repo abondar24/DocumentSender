@@ -19,7 +19,7 @@ Reader:
 
 gradle clean build (-x test to skipt tests)
 
-java -jar <jar_location> Reader-1.0.jar or gradle bootJar run
+java -jar <jar_location> Reader-1.0.jar or gradle bootRun
 ```
 
 Writer:

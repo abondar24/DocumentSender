@@ -18,7 +18,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: mappings,metrics,shutdown
+        include: mappings,metrics,shutdown,health
 
 
 kafka:

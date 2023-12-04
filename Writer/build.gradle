@@ -16,8 +16,16 @@ version '1.1'
 
 bootJar {
     archivesBaseName = 'writer'
+    duplicatesStrategy = DuplicatesStrategy.WARN
 }
 
+distTar {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+}
+
+distZip {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+}
 
 repositories {
     mavenCentral()
@@ -40,12 +48,12 @@ dependencies {
     implementation "org.apache.camel:camel-core:$camelVersion"
     implementation "org.apache.camel:camel-kafka:$camelVersion"
     implementation "org.apache.camel:camel-http:$camelVersion"
-    implementation "org.apache.camel:camel-swagger-java:$camelSwaggerVersion"
+    implementation "org.apache.camel.springboot:camel-swagger-java-starter:$camelSwaggerVersion"
     implementation "org.apache.camel.springboot:camel-spring-boot-starter:$camelVersion"
     implementation "org.apache.camel.springboot:camel-jackson-starter:$camelVersion"
     implementation("org.apache.camel.springboot:camel-servlet-starter:$camelVersion")
     implementation "org.apache.camel.springboot:camel-springdoc-starter:$camelVersion"
-    implementation("ch.qos.logback:logback-core:$logbackVersion")
+    implementation"ch.qos.logback:logback-core:$logbackVersion"
 
 
     //test dependencies

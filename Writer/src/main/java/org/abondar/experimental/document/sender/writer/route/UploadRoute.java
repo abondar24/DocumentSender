@@ -6,10 +6,10 @@ import org.abondar.experimental.document.sender.writer.parser.DocumentParser;
 import org.abondar.experimental.document.sender.writer.properties.KafkaProperties;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-
+import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.InputStream;
 
@@ -17,9 +17,6 @@ import java.io.InputStream;
 public class UploadRoute extends RouteBuilder {
 
     private final DocumentParser documentParser;
-
-    private DocumentData res;
-
     private final KafkaProperties kafkaProperties;
 
     @Autowired
@@ -31,6 +28,11 @@ public class UploadRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
+        restConfiguration()
+                .apiHost("localhost")
+                .port(8020)
+                .apiContextPath("/sender");
+
         rest()
                 .post()
                 .path("/upload")
@@ -38,13 +40,14 @@ public class UploadRoute extends RouteBuilder {
                 .consumes("multipart/form-data")
                 .produces("application/json")
                 .apiDocs(true)
-                .to("direct:sendToKafka");
+                .description("Path to upload file")
+               .to("direct:sendToKafka");
 
         from("direct:sendToKafka").routeId("kafkaSend")
                 .log(LoggingLevel.DEBUG, "#{headers}")
                 .process(exchange -> {
                     var req = exchange.getIn().getBody(InputStream.class);
-                    res = documentParser.parseDocument(req);
+                    var res = documentParser.parseDocument(req);
                     var doc = Document.newBuilder()
                             .setContent(res.getContent())
                             .setMediaType(res.getMediaType())
@@ -52,7 +55,7 @@ public class UploadRoute extends RouteBuilder {
 
                     exchange.getMessage().setBody(doc.build());
                 })
-                .to("kafka:"+kafkaProperties.getTopicName()+"?brokers="+kafkaProperties.getBroker());
+                .to("kafka:" + kafkaProperties.getTopicName() + "?brokers=" + kafkaProperties.getBroker());
     }
 
 }
