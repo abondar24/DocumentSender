@@ -4,13 +4,12 @@ plugins {
     id 'idea'
     id "org.springframework.boot" version "$springBootVersion"
     id "io.freefair.lombok" version "$lombokVersion"
-    id "com.bakdata.avro" version "$avroVersion"
 }
 
 apply plugin: 'application'
 apply plugin: 'io.spring.dependency-management'
 
-group 'org.abondar.experimental'
+group 'org.abondar.experimental.documentsender'
 version '1.1'
 
 
@@ -29,16 +28,18 @@ distZip {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 test {
     useJUnitPlatform()
 }
 
+
+
 dependencies {
     implementation "org.apache.tika:tika-core:$tikaVersion"
     implementation "org.apache.tika:tika-parsers-standard-package:$tikaVersion"
-    implementation "org.apache.avro:avro-compiler:$avroCompilerVersion"
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
@@ -51,10 +52,11 @@ dependencies {
     implementation "org.apache.camel.springboot:camel-swagger-java-starter:$camelSwaggerVersion"
     implementation "org.apache.camel.springboot:camel-spring-boot-starter:$camelVersion"
     implementation "org.apache.camel.springboot:camel-jackson-starter:$camelVersion"
-    implementation("org.apache.camel.springboot:camel-servlet-starter:$camelVersion")
+    implementation "org.apache.camel.springboot:camel-servlet-starter:$camelVersion"
     implementation "org.apache.camel.springboot:camel-springdoc-starter:$camelVersion"
+    implementation "ch.qos.logback:logback-classic:$logbackVersion"
     implementation"ch.qos.logback:logback-core:$logbackVersion"
-
+    implementation "org.abondar.experimental.documentsender:Data:$version"
 
     //test dependencies
     testImplementation "org.springframework.boot:spring-boot-starter-test"

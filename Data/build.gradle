@@ -1,0 +1,50 @@
+import org.gradle.api.file.DuplicatesStrategy
+
+plugins {
+    id 'java'
+    id 'idea'
+    id "com.bakdata.avro" version "$avroVersion"
+    id 'maven-publish'
+}
+
+group = 'org.abondar.experimental.documentsender'
+version = '1.1'
+
+configurations {
+    all {
+        exclude group: 'org.slf4j'
+    }
+}
+
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+
+jar {
+    from{
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.WARN
+}
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId =  'org.abondar.experimental.documentsender'
+            artifactId = 'Data'
+            version =  '1.1'
+
+            from components.java
+        }
+    }
+}
+
+dependencies {
+    implementation "org.apache.avro:avro-compiler:$avroCompilerVersion"
+}

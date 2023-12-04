@@ -1,15 +1,14 @@
 plugins {
     id 'java'
     id 'idea'
-    id "com.bakdata.avro" version "$avroVersion"
 }
 
 apply plugin: 'application'
 
-group 'org.abondar.experimental'
+group 'org.abondar.experimental.documentsender'
 version '1.1'
 
-mainClassName = 'org.abondar.experimental.document.sender.reader.Reader'
+mainClassName = 'org.abondar.experimental.documentsender.reader.Reader'
 
 sourceCompatibility = 21
 
@@ -27,12 +26,13 @@ jar {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
     implementation "org.apache.camel:camel-core:$camelVersion"
     implementation "org.apache.camel:camel-kafka:$camelVersion"
-    implementation "org.apache.avro:avro-compiler:$avroCompilerVersion"
+    implementation "org.abondar.experimental.documentsender:Data:1.1"
 
 }
 

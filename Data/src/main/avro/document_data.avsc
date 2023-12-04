@@ -1,0 +1,11 @@
+{"namespace": "org.abondar.experimental.documentsender.data.avro",
+ "type": "record",
+ "name": "Document",
+ "fields": [
+     {"name": "mediaType",  "type": "string"},
+     {"name": "content", "type": "string"},
+     {"name": "metadata","type": {
+                               "type": "array",
+                               "items": "string"
+                            } }]
+}
