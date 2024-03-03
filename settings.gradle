@@ -1,0 +1,5 @@
+rootProject.name='DocumentSender'
+
+include 'Data'
+include 'Reader'
+include 'Writer'

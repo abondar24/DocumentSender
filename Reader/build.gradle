@@ -1,16 +1,6 @@
-plugins {
-    id 'java'
-    id 'idea'
-}
 
 apply plugin: 'application'
 
-group 'org.abondar.experimental.documentsender'
-version '1.1'
-
-mainClassName = 'org.abondar.experimental.documentsender.reader.Reader'
-
-sourceCompatibility = 21
 
 jar {
     from{
@@ -32,7 +22,9 @@ repositories {
 dependencies {
     implementation "org.apache.camel:camel-core:$camelVersion"
     implementation "org.apache.camel:camel-kafka:$camelVersion"
-    implementation "org.abondar.experimental.documentsender:Data:1.1"
+    dependencies {
+        implementation project(':Data')
+    }
 
 }
 
