@@ -9,23 +9,33 @@ camel:
       allow-java-serialized-object: true
   servlet:
     mapping:
-      context-path: "/sender/*"
+      context-path: "/api/*"
   dataformat:
     jackson:
       use-list: true
+  springdoc:
+    enabled: true
+
+  rest:
+    component: servlet
+    use-x-forward-headers: true
+    api-property:
+      api:
+        title: "Document sender API"
+        version: "1.0.0"
+    context-path: "/api"
+    data-format-property:
+      prettyPrint: true
+
 
 management:
   endpoints:
     web:
       exposure:
-        include: mappings,metrics,shutdown,health
+        include: mappings,metrics,shutdown,health,info
 
 
 kafka:
   topicName: documentSender
   broker: localhost:9092
 
-
-writer:
-  username: writer
-  password: write123

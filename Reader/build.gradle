@@ -1,5 +1,13 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'idea'
+}
 
 apply plugin: 'application'
+
+group 'org.abondar.experimental.documentsender'
+version '1.1'
 
 
 jar {
@@ -19,6 +27,9 @@ repositories {
     mavenLocal()
 }
 
+test {
+    useJUnitPlatform()
+}
 dependencies {
     implementation "org.apache.camel:camel-core:$camelVersion"
     implementation "org.apache.camel:camel-kafka:$camelVersion"

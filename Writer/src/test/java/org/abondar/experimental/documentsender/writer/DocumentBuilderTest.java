@@ -16,9 +16,9 @@ public class DocumentBuilderTest {
         var data = new DocumentData("test","test", List.of("test"));
 
         var doc =   Document.newBuilder()
-                .setContent(data.getContent())
-                .setMediaType(data.getMediaType())
-                .setMetadata(data.getMetadata()).build();
+                .setContent(data.content())
+                .setMediaType(data.mediaType())
+                .setMetadata(data.metadata()).build();
 
         assertEquals("test",doc.getContent());
         assertEquals("test",doc.getMediaType());

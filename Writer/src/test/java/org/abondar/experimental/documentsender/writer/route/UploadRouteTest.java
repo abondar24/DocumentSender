@@ -74,12 +74,16 @@ public class UploadRouteTest {
 
         webTestClient
                 .post()
-                .uri("/sender/upload")
+                .uri("/api/v1/upload")
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "form-data; name=file; filename=test.doc")
                 .bodyValue(parts)
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus()
+                .isOk()
+                .expectBody()
+                .jsonPath("$.message")
+                .isEqualTo("File uploaded successfully");
 
 
         mockKafkaEndpoint.assertIsSatisfied();

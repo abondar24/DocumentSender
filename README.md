@@ -29,3 +29,8 @@ gradle clean build
 
 java -jar <jar_location> Writer-1.0.jar or gradle run
 ```
+
+## Swagger ui
+```
+http://localhost:8020/swagger-ui/index.html
+```
