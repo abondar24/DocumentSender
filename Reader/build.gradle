@@ -33,6 +33,7 @@ test {
 dependencies {
     implementation "org.apache.camel:camel-core:$camelVersion"
     implementation "org.apache.camel:camel-kafka:$camelVersion"
+    implementation "org.apache.avro:avro:1.11.3"
     dependencies {
         implementation project(':Data')
     }
