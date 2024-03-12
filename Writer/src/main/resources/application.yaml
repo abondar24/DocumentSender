@@ -39,3 +39,6 @@ kafka:
   topicName: documentSender
   broker: localhost:9092
 
+writer:
+  username: writer
+  password: writer1234

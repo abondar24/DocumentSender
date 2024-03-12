@@ -3,6 +3,7 @@ plugins {
     id 'jacoco'
     id 'idea'
     id "org.springframework.boot" version "$springBootVersion"
+    id "io.freefair.lombok" version "$lombokVersion"
 }
 
 apply plugin: 'application'
@@ -43,7 +44,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-webflux"
-
+    implementation "org.springframework.boot:spring-boot-starter-security"
 
     implementation "org.apache.camel:camel-http:$camelVersion"
     implementation "org.apache.camel:camel-core:$camelVersion"
@@ -52,7 +53,6 @@ dependencies {
     implementation "org.apache.camel.springboot:camel-spring-boot-starter:$camelVersion"
     implementation "org.apache.camel.springboot:camel-jackson-starter:$camelVersion"
     implementation "org.apache.camel.springboot:camel-servlet-starter:$camelVersion"
-    implementation "org.apache.camel.springboot:camel-swagger-java-starter:3.22.1"
     implementation "org.apache.camel.springboot:camel-springdoc-starter:$camelVersion"
 
     dependencies {

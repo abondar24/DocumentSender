@@ -14,12 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.io.File;
 import java.io.InputStream;
-import java.util.List;
 
-import static org.apache.camel.model.rest.RestParamType.body;
 import static org.apache.camel.model.rest.RestParamType.formData;
 
 @Component
@@ -86,7 +83,7 @@ public class UploadRoute extends RouteBuilder {
 
                     // Set HTTP response code and body before completing the exchange
                     exchange.getMessage().setHeader(Exchange.HTTP_RESPONSE_CODE, 200);
-                    exchange.getMessage().setHeader(Exchange.CONTENT_TYPE,MediaType.APPLICATION_JSON_VALUE);
+                    exchange.getMessage().setHeader(Exchange.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
                     exchange.getMessage().setBody(jsonResponse);
                 });
     }
