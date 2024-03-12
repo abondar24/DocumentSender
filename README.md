@@ -39,3 +39,6 @@ gradle bootJar
 ```
 http://localhost:8020/swagger-ui/index.html
 ```
+## Security
+
+Check credentials in application.yaml

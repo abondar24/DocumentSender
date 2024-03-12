@@ -60,6 +60,7 @@ public class UploadRoute extends RouteBuilder {
                 .code(200)
                 .message("File uploaded successfully")
                 .endResponseMessage()
+                .security("basic")
                 .to("direct:sendToKafka");
 
 
